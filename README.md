@@ -24,6 +24,26 @@ to use in other environments with Python 3.5 or later:
 
     pip install lttbc
 
+## Packaging and distributing 
+
+https://packaging.python.org/en/latest/tutorials/packaging-projects/
+
+https://realpython.com/python-wheels/
+
+https://github.com/ultrajson/ultrajson
+
+1. Update version in setup.py
+2. Run the following:
+
+    python -m pip install --upgrade build
+    # Build distribution packages
+    python -m build
+    # Build manylinux wheels
+    docker container run -t --rm -e PLAT=manylinux2014_x86_64 -v $(pwd):/lttbc quay.io/pypa/manylinux2014_x86_64 /lttbc/build-wheels.sh
+    # Upload distribution
+    python -m pip install --upgrade twine
+    python -m twine upload dist/*
+
 ## How to use on the field
 
 The module ``lttbc`` differs in the standard input from other largest triangle three buckets implementations.
